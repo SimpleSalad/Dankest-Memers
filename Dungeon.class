@@ -23,7 +23,7 @@ public class Dungeon{
 		 for (int j = i; j < (i + w); j++){
 		   for (int k = i; k < (i + w); k++){
 			  floorPlan[j][k] = 1;			
-			}
+		   }
 		}
 		i += w * 3;  //spaces the rooms
 		z += h * 3;
