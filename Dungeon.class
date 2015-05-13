@@ -1,4 +1,36 @@
 public class Dungeon{
-  int[] floorPlan; 
+  int[][] floorPlan;
   
+  public Dungeon (int floor){
+    int r = 20 + floor * 5;   //creates floor size
+    floorPlan = new int[r][r];   //populates floor with walls
+	 for (int i = 0; i < r; i++){
+	 	for (int j = 0; j < r; j++){
+		  floorPlan[i][j] = 0;
+		}
+    }
+	 excavate();  //creates rooms
+  }
+  
+  private void excavate(){
+    int max = Math.min(floorPlan[0].length / 5,10); //max room size
+	 for (int i = 0; i < floorPlan[0].length - max;i++){   //digs out rooms
+	  for (int z = 0; z < floorPlan[0].length - max; z++){
+	   int start = (int)(Math.random() * 5);
+		if (start == 5){  //decides if room will start
+		 int w = (int)(Math.random() * max);  //random height and width
+		 int h = (int)(Math.random() * max);
+		 for (int j = i; j < (i + w); j++){
+		   for (int k = i; k < (i + w); k++){
+			  floorPlan[j][k] = 1;			
+			}
+		}
+		i += w * 3;  //spaces the rooms
+		z += h * 3;
+	 }
+	 } 
+  }
+  
+}
+
 }
