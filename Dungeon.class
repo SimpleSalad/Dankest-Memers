@@ -1,36 +1,77 @@
-public class Dungeon{
-  int[][] floorPlan;
-  
-  public Dungeon (int floor){
-    int r = 20 + floor * 5;   //creates floor size
-    floorPlan = new int[r][r];   //populates floor with walls
-	 for (int i = 0; i < r; i++){
-	 	for (int j = 0; j < r; j++){
-		  floorPlan[i][j] = 0;
-		}
-    }
-	 excavate();  //creates rooms
-  }
-  
-  private void excavate(){
-    int max = Math.min(floorPlan[0].length / 5,10); //max room size
-	 for (int i = 0; i < floorPlan[0].length - max;i++){   //digs out rooms
-	  for (int z = 0; z < floorPlan[0].length - max; z++){
-	   int start = (int)(Math.random() * 5);
-		if (start == 5){  //decides if room will start
-		 int w = (int)(Math.random() * max);  //random height and width
-		 int h = (int)(Math.random() * max);
-		 for (int j = i; j < (i + w); j++){
-		   for (int k = i; k < (i + w); k++){
-			  floorPlan[j][k] = 1;			
-		   }
-		}
-		i += w * 3;  //spaces the rooms
-		z += h * 3;
-	 }
-	 } 
-  }
-  
-}
+//fix always 16
 
-}
+   public class Dungeon{
+      int[][] floorPlan;
+   
+      public Dungeon (int floor){
+         int r = 20 + (floor/2)*5;   //finds floor size
+         floorPlan = new int[r][r];   //creates floor
+         newExcavate();  //creates rooms
+      }
+   
+      private void newExcavate(){
+         int cell = Math.min(floorPlan[0].length / 5,10); //cell size
+         int temp[] = new int[(floorPlan[0].length / cell)*(floorPlan[0].length / cell)]; //array for finding where to put rooms
+         int rooms = Math.max(temp.length/2,Math.min((int)(3.0/4.0*(double)temp.length), (int)(Math.random()*temp.length))); //number of rooms between 1/2 and 3/4 of cells
+         for (int i = 0; i < rooms; i++){
+            int ranCell = (int)(Math.random() * temp.length);
+            if (temp[ranCell] != 1)
+               temp[ranCell] = 1;
+            else
+               i--;
+         }
+         for (int i = 0; i < temp.length; i++) //debugging
+            System.out.print(temp[i]);
+         for (int i = 0; i < temp.length; i++){
+            if (temp[i] == 1){
+               int h = Math.max(4,(int)(Math.random() * cell)); //random room height
+               int l = Math.max(4,(int)(Math.random() * cell)); //random room length
+               int startAtRows = (i/(floorPlan[0].length / cell)*cell); //find starting row
+               int startAtCols = (i%(floorPlan[0].length / cell)*cell); //find starting column
+               for (int j = startAtRows; j < startAtRows + h; j++){
+                  for (int k = startAtCols; k < startAtCols + l; k++){
+                     floorPlan[j][k] = 1;
+                  }
+               }
+            }
+         }
+			System.out.println("");
+			System.out.println("");
+         for (int i = 0; i < floorPlan.length; i++){
+            for (int j = 0; j < floorPlan[0].length; j++){
+               System.out.print(floorPlan[i][j]);
+            }
+            System.out.println("");
+         }
+      
+      }
+   
+   
+      private void excavate(){
+         int max = Math.min(floorPlan[0].length / 5,10); //max room size
+         for (int i = 0; i < floorPlan[0].length - 1 - max;i++){   //digs out rooms
+            for (int z = 0; z < floorPlan[0].length - 1 - max; z++){
+               int start = (int)(Math.random() * 3);
+               if (start == 0){  //decides if room will start
+                  int w = Math.max((int)(Math.random() * max), 2);  //random height and width
+                  int h = Math.max((int)(Math.random() * max), 2);
+                  for (int j = i; j < (i + w); j++){
+                     for (int k = i; k < (i + h); k++){
+                        floorPlan[j][k] = 1;			
+                     }
+                  }
+                  i += (int)(Math.random()+1)*3;  //spaces the rooms
+                  z += (int)(Math.random()+1)*3;
+               }
+            } 
+         }
+         for (int i = 0; i < floorPlan.length; i++){
+            for (int j = 0; j < floorPlan[0].length; j++){
+               System.out.print(floorPlan[i][j]);
+            }
+            System.out.println("");
+         }
+      
+      }
+   
+   }
