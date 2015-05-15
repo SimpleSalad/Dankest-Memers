@@ -1,0 +1,48 @@
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.Toolkit;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+class renderDungeon extends JComponent{
+	BufferedImage tileFloor = null;
+	BufferedImage tileWall = null;
+	public void renderTiles(int[][] dungeonFloor){
+		try {
+			BufferedImage tileFloor =  ImageIO.read(new File("tileFloor.png"));//import images
+		} catch (IOException e) {
+		}
+		try {
+		BufferedImage tileWall =  ImageIO.read(new File("tileWall.png"));
+		} catch (IOException e) {
+		}
+		Graphics f = tileFloor.getGraphics();//images into graphics
+		Graphics w = tileWall.getGraphics();
+		for(int i=0;i<dungeonFloor.length;i++){//for entire dungeon
+			for(int j=0;j<dungeonFloor[0].length;j++){
+				if(dungeonFloor[i][j]==0){//if floor
+					f.drawImage(tileFloor,30+(16*j),30+(16*i),this);//print floor in appropriate location
+				}
+				if(dungeonFloor[i][j]==1){//if wall
+					f.drawImage(tileWall,30+(16*j),30+(16*i),this);//print wall
+				}
+			}
+		}
+	}
+}
+
+class Graphics2DDrawImage {
+	public static void main(String[] a) {
+		JFrame window = new JFrame();
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setBounds(30, 30, 300, 300);
+		window.getContentPane().add(new renderDungeon());
+		window.setVisible(true);
+	}
+}
