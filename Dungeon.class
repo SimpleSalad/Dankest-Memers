@@ -73,5 +73,7 @@
          }
       
       }
-   
+		public int[][] returnPlan(){
+			return floorPlan;
+		}
    }
