@@ -1,4 +1,3 @@
-//fix always 16
 
    public class Dungeon{
       int[][] floorPlan;
@@ -6,8 +5,20 @@
       public Dungeon (int floor){
          int r = 20 + (floor/2)*5;   //finds floor size
          floorPlan = new int[r][r];   //creates floor
-         newExcavate();  //creates rooms
+         excavateV3();  //creates rooms
       }
+		
+		
+		private void excavateV3(){
+		  int center = floorPlan.length / 2;
+		  for (int i = center - 5; i < center + 5; i++){
+		    for (int j = center - 5; j < center + 5; j++){
+            floorPlan[i][j] = 1;
+			 }
+		  }
+		  floorPlan[center][center] = 2;
+		  
+		}
    
       private void newExcavate(){
          int cell = Math.min(floorPlan[0].length / 5,10); //cell size
@@ -43,7 +54,7 @@
             }
             System.out.println("");
          }
-      
+         
       }
    
    
@@ -76,4 +87,5 @@
 		public int[][] returnPlan(){
 			return floorPlan;
 		}
+   
    }
