@@ -3,7 +3,7 @@
       int[][] floorPlan;
    
       public Dungeon (int floor){
-         int r = 20 + (floor/2)*5;   //finds floor size
+         int r = 21 + (floor/2)*5;   //finds floor size
          floorPlan = new int[r][r];   //creates floor
          excavateV3();  //creates rooms
       }
@@ -19,6 +19,21 @@
 		  floorPlan[center][center] = 2;
 		  
 		}
+		
+		private void makeARoom(int startPointX, int startPointY, String direction){
+		  int roomChoice = (int)(Math.random() * 10);
+		  boolean clear = true;
+		  if (roomChoice == 0 || roomChoice == 1){
+		    int length = (int)(Math.random() * Math.max(3, floorPlan.length / 8));
+			 if (direction.equals("up")){
+			   for (int i = startPointX - 1; i < startPointX + 2; i++){
+				  for (int j = startPointY - length; j < startPointY - 1; j++)
+				    if (floorPlan[i][j] != 0){clear = false;}
+				}
+			 }
+		}
+	   }
+		
    
       private void newExcavate(){
          int cell = Math.min(floorPlan[0].length / 5,10); //cell size
