@@ -17,20 +17,29 @@
 			 }
 		  }
 		  floorPlan[center][center] = 2;
-		  
+		  makeARoom(5, 5, "up");
 		}
 		
 		private void makeARoom(int startPointX, int startPointY, String direction){
-		  int roomChoice = (int)(Math.random() * 10);
+		  int roomChoice = (int)(Math.random() * 2);
 		  boolean clear = true;
 		  if (roomChoice == 0 || roomChoice == 1){
 		    int length = (int)(Math.random() * Math.max(3, floorPlan.length / 8));
 			 if (direction.equals("up")){
-			   for (int i = startPointX - 1; i < startPointX + 2; i++){
+			   for (int i = startPointX - 1; i < startPointX + 2; i++){  //checks if empty
 				  for (int j = startPointY - length; j < startPointY - 1; j++)
 				    if (floorPlan[i][j] != 0){clear = false;}
 				}
+				for (int i = startPointY; i < startPointY - length; i++)
+				  floorPlan[startPointX][i] = 1;
 			 }
+			 if (direction.equals("down")){
+			   for (int i = startPointX - 1; i < startPointX + 2; i++){
+				  for (int j = startPointY + length; j < startPointY + 1; j++)
+				    if (floorPlan[i][j] != 0){clear = false;}
+				  }
+				}
+
 		}
 	   }
 		
