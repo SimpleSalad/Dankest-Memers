@@ -20,14 +20,14 @@ class renderDungeon extends JComponent{
 		Image tileStairs = Toolkit.getDefaultToolkit().getImage("tileStairs.png");
 		for(int i=0;i<dungeonFloor.length;i++){//for entire dungeon
 			for(int j=0;j<dungeonFloor[0].length;j++){
-				if(dungeonFloor[i][j]==1){//if floor
-					g.drawImage(tileFloor,30+(32*j),30+(32*i),null);//print floor in appropriate location
+				if(dungeonFloor[i][j]==0){//if floor
+					g.drawImage(tileFloor,(32*j),(32*i),null);//print floor in appropriate location
 				}
-				if(dungeonFloor[i][j]==0){//if wall
-					g.drawImage(tileWall,30+(32*j),30+(32*i),null);//print wall
+				if(dungeonFloor[i][j]==1){//if wall
+					g.drawImage(tileWall,(32*j),(32*i),null);//print wall
 				}
 				if(dungeonFloor[i][j]==2){//if stairs
-					g.drawImage(tileStairs,30+(32*j),30+(32*i),null);//print stairs
+					g.drawImage(tileStairs,(32*j),(32*i),null);//print stairs
 				}
 			}
 		}
