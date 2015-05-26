@@ -1,0 +1,20 @@
+//player class
+public class player extends unit{
+	int potions = 1;
+	int maxhp = hp;
+	int expmax = 10;
+	int exp = 0;
+	
+	public void calcStats(){
+		atk = lvl * 1;
+		maxhp = lvl * 5;
+		def = lvl * 1;
+	}
+	public void checkXP(){
+		if (exp >= expmax){
+			lvl++;
+			exp = expmax - exp;
+			expmax = expmax * (int)(Math.pow(2,(lvl/2))) + 5;
+		}
+	}
+}
