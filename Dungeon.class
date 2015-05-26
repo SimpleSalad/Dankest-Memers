@@ -48,8 +48,8 @@
             System.out.print(temp[i]);
          for (int i = 0; i < temp.length; i++){
             if (temp[i] == 1){
-               int h = Math.max(4,(int)(Math.random() * cell) -1 ); //random room height
-               int l = Math.max(4,(int)(Math.random() * cell) - 1); //random room length
+               int h = Math.max(3,(int)(Math.random() * cell) -1 ); //random room height
+               int l = Math.max(3,(int)(Math.random() * cell) - 1); //random room length
                int startAtRows = (i/(floorPlan[0].length / cell)*cell); //find starting row
                int startAtCols = (i%(floorPlan[0].length / cell)*cell); //find starting column
                for (int j = startAtRows; j < startAtRows + h; j++){
