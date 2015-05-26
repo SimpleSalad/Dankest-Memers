@@ -11,10 +11,10 @@ import javax.imageio.ImageIO;
 
 public class Main {
 	public static void main(String [ ] args){
-		Dungeon d = new Dungeon(10);
+		Dungeon d = new Dungeon(5);
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setBounds(30, 30, 300, 300);
+		window.setBounds(30, 30, 672, 702);
 		renderDungeon r = new renderDungeon(d.returnPlan());
 		window.getContentPane().add(r);
 		window.setVisible(true);
