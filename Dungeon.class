@@ -1,9 +1,11 @@
 
    public class Dungeon{
       int[][] floorPlan;
+		unit[][] unitMap;
    
       public Dungeon (int floor){
          int r = 21 + (floor/2)*5;   //finds floor size
+			unitMap = new unit[r][r];
          floorPlan = new int[r][r];   //creates floor
 			for (int i = 0; i < floorPlan[0].length; i++){
 			  for (int j = 0; j < floorPlan[0].length; j++){
@@ -13,7 +15,21 @@
 			  }
 			}
          dropWalls();  //creates rooms
+			addStairs();
       }
+		
+		private void addStairs(){
+		  int x = (int)(Math.random() * floorPlan.length);
+		  int y = (int)(Math.random() * floorPlan.length);
+		  int center = floorPlan.length/2;
+		  if (x < center - 5 || x > center + 5){
+		    if (y < center - 5 || y > center + 5){
+			   floorPlan[x][y] = 2;
+				return;
+			 }
+		  }
+		  addStairs();
+		}
 		
 		private void dropWalls(){
 		   int cell = Math.min(floorPlan[0].length / 5,10); //cell size
