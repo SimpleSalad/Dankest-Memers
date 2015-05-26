@@ -1,0 +1,10 @@
+//player and enemy units interface base
+abstract class unit {
+	int lvl;
+	int atk;
+	int def;
+	int hp;
+	
+	abstract void calcStats();
+}
+
