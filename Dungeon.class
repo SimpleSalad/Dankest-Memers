@@ -7,27 +7,50 @@
          floorPlan = new int[r][r];   //creates floor
 			for (int i = 0; i < floorPlan[0].length; i++){
 			  for (int j = 0; j < floorPlan[0].length; j++){
-			    if (i == 0 || j == 0 || i == floorPlan[0].length || j == floorPlan[0].length){
+			    if (i == 0 || j == 0 || i == floorPlan[0].length - 1 || j == floorPlan[0].length - 1){
 				   floorPlan[i][j] = 1;
 				 }
 			  }
 			}
-         excavate();  //creates rooms
+         dropWalls();  //creates rooms
       }
 		
 		private void dropWalls(){
-		  
-		}
-		
-		private void excavateV3(){
-		  int center = floorPlan.length / 2;
-		  for (int i = center - 5; i < center + 5; i++){
-		    for (int j = center - 5; j < center + 5; j++){
-            floorPlan[i][j] = 1;
-			 }
+		   int cell = Math.min(floorPlan[0].length / 5,10); //cell size
+         int temp[] = new int[(floorPlan[0].length / cell)*(floorPlan[0].length / cell)]; //array for finding where to put rooms
+         int rooms = Math.max(temp.length/2,Math.min((int)(3.0/4.0*(double)temp.length), (int)(Math.random()*temp.length))); //number of rooms between 1/2 and 3/4 of cells
+         for (int i = 0; i < rooms; i++){
+            int ranCell = (int)(Math.random() * temp.length);
+            if (temp[ranCell] != 1)
+               temp[ranCell] = 1;
+            else
+               i--;
+         }
+         for (int i = 0; i < temp.length; i++) //debugging
+            System.out.print(temp[i]);
+         for (int i = 0; i < temp.length; i++){
+            if (temp[i] == 1){
+               int h = Math.max(4,(int)(Math.random() * cell)); //random room height
+               int l = Math.max(4,(int)(Math.random() * cell)); //random room length
+               int startAtRows = (i/(floorPlan[0].length / cell)*cell); //find starting row
+               int startAtCols = (i%(floorPlan[0].length / cell)*cell); //find starting column
+               for (int j = startAtRows; j < startAtRows + h; j++){
+                  for (int k = startAtCols; k < startAtCols + l; k++){
+                     floorPlan[j][k] = 1;
+                  }
+               }
+            }
+         }
+			System.out.println("");
+			System.out.println("");
+         for (int i = 0; i < floorPlan.length; i++){
+            for (int j = 0; j < floorPlan[0].length; j++){
+               System.out.print(floorPlan[i][j]);
+            }
+            System.out.println("");
+         }
+
 		  }
-		  floorPlan[center][center] = 2;
-		}
 		
 		private void makeARoom(int startPointX, int startPointY, String direction){
 		  int roomChoice = (int)(Math.random() * 2);
