@@ -24,8 +24,10 @@
 		  int center = floorPlan.length/2;
 		  if (x < center - 5 || x > center + 5){
 		    if (y < center - 5 || y > center + 5){
+			  if (floorPlan[x][y] == 0){
 			   floorPlan[x][y] = 2;
 				return;
+			  }
 			 }
 		  }
 		  addStairs();
@@ -46,8 +48,8 @@
             System.out.print(temp[i]);
          for (int i = 0; i < temp.length; i++){
             if (temp[i] == 1){
-               int h = Math.max(4,(int)(Math.random() * cell)); //random room height
-               int l = Math.max(4,(int)(Math.random() * cell)); //random room length
+               int h = Math.min(3,(int)(Math.random() * cell)); //random room height
+               int l = Math.min(3,(int)(Math.random() * cell)); //random room length
                int startAtRows = (i/(floorPlan[0].length / cell)*cell); //find starting row
                int startAtCols = (i%(floorPlan[0].length / cell)*cell); //find starting column
                for (int j = startAtRows; j < startAtRows + h; j++){
